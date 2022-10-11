@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+
+{% block content %}
+<!-- content found from https://www.albionmeatproducts.co.uk/raw-dog-food/-->
+<div class="container-fluid page-wrapper">
+    <div class="container page-wrapper-inner" style="padding:10px 0px;">
+        <div class="row product-row">
+            {% for product in products %}
+            <div class="col-lg-4 product-info">
+                <img src="{{ product.image.url }}" class="img-product" >
+                <div class="box-element-product product" >
+                    <h6><Strong>{{ product.name }}</Strong></h6>
+                    <hr>
+                    <button class="btn btn-outline-secondary add-btn update-cart"
+                            data-product={{product.id}} 
+                            data-action="add">
+                            Add to Cart 
+                        <span style="padding: 3px;">
+                            <strong>£ {{ product.price|floatformat:2 }}</strong>
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+

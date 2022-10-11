@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+<div class="container-fluid page-wrapper">
+  <div class="container page-wrapper-inner"> 
+
+  <div class="row justify-content-center">
+    <div class="col-lg-6 pad-30">
+
+
+
+      {% if user.is_authenticated %}
+        <h2 class="pad-20">You are Logged in</h2>
+        <p>
+          <strong>Welcome, {{ user.username }} </strong>
+        </p>
+      {% else %}
+      <h2 class="pad-20">Login</h2>
+      <hr>
+      <form method="POST">
+        {% csrf_token %}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"><i class="bi-person-fill"></i></span>
+            </div>
+            <input name="username" type="text" 
+                  value="" class="input form-control" id="username" 
+                  placeholder="Enter username" required="true" aria-label="username"
+            />
+          </div>
+
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+            </div>
+            <input name="password" type="password" value="user-password" class="input form-control" 
+                  id="pwd" placeholder="Enter password" required="true" aria-label="password"  
+            />
+            <div class="input-group-append" >
+              <span class="input-group-text" onclick="password_show_hide();">
+                <i class="bi bi-eye-fill" id="show_eye"></i>
+                <i class="bi bi-eye-fill-slash d-none" id="hide_eye"></i>
+              </span>
+            </div>
+          </div>
+          {% if form.errors %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Error loging in ! Please check login details and try again.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endif  %}
+
+          {%  if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+          {% endif %}
+
+          <div> 
+            <input type="submit" class='btn btn-primary' value="Login" style="margin-right: 15px;">     
+          </div>
+        </form>
+
+        <p><br/>
+          Forgotten Password ? <a href="{% url 'password_reset' %}">Reset Here.</a> 
+          Not Registered <a href="{% url 'accounts:signup' %}">Signup Here</a>
+        </p>
+        {% endif %}      
+      </div>
+    </div>
+  </div> <!--LAST DIV BEFORE FOOTER -->
+
+<script>
+  function password_show_hide() {
+    var x = document.getElementById("pwd");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+}
+</script>
+
+
+{% endblock %}

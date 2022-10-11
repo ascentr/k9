@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="container-fluid page-wrapper">
+  <div class="container page-wrapper-inner" > 
+
+    <div class="row justify-content-center">
+      <div class="col-lg-6 pad-30">
+        <h2 class="pad-20">Sign Up</h2>
+        <hr>
+        <form method="POST">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+
+          {% if form.errors %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Opps There was an error ! Please try again.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          {% endif  %}
+
+          {%  if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+          {% endif %}
+          <input type="submit" class="btn btn-primary" value="Sign up">
+            </form>
+      </div>
+    </div>
+
+</div>
+</div>
+{% endblock %}
