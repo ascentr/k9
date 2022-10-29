@@ -2,9 +2,7 @@
 {% load static %}
 {% block content %}
 <div class="container-fluid page-wrapper">
-    <div class="container" 
-         style="background-color: white; 
-            top:20px; position:relative;"> 
+    <div class="container page-wrapper-inner" > 
         <div class="row">
             <div class="col-lg-08">
                 <div class="box-element">
@@ -26,38 +24,74 @@
                         </tr>
                     </table>
                 </div>
-                <br>
+                <div class="row">
+                    <div class="col" style="display: flex; flex-direction: row; justify-content: center;">    
+                        <div class="col-lg-4 product-info-treat">
+                            <img src="{% static 'images/treats-01.png' %}" width="150px" height="auto">
+                        </div>
+                        <div style="padding:20px;">
+                            <div class="text-treat">
+                                Add A Box of Natural Treats for 
+                                <strong>£5</strong> 
+                            </div><br/>
+                            <button class="btn btn-outline-secondary add-btn update-cart"
+                                data-product={{product.id}} 
+                                data-action="add">
+                                <Strong> Add to Cart </Strong>                      
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="box-element">
                     <div class="cart-row">
-                        <div style="flex:2;"></div>
+                        <div style="flex:1;"></div>
                         <div style="flex:2;"><strong>Item</strong></div>
                         <div style="flex:1;"><strong>Price</strong></div>
                         <div style="flex:1;"><strong>Quantity</strong></div>
                         <div style="flex:1;"><strong>Total</strong></div>
+                        <div style="flex:1;"><strong></strong></div>
                     </div>
                     {% for item in items %}
                         <div class="cart-row">
-                            <div style="flex:2;"><img class="row-image" src="{{ item.product.imageURL}}" border="1" width="40px"></div>
-                            <div style="flex:2;"><p>{{item.product.name}}</p></div>
-                            <div style="flex:1;"><p>{{item.product.price|floatformat:2}}</p></div>
+                            <div style="flex:1;"><img class="row-image" src="{{ item.product.imageURL}}" border="1" width="40px"></div>
+                            <div style="flex:2;"><p class="cart-item-text">{{item.product.name}}</p></div>
+
+                            {% if item.quantity >= 20 %}
+                            <div style="flex:1;"><p class="cart-item-text">{{item.product.multibuy_price2|floatformat:3}}</p></div>
+                            {% elif item.quantity >= 10 %}
+                            <div style="flex:1;"><p class="cart-item-text">{{item.product.multibuy_price|floatformat:2}}</p></div>
+                            {% else %}
+                            <div style="flex:1;"><p class="cart-item-text">{{item.product.price|floatformat:2}}</p></div>
+                            {% endif %}
+                            
+
                             <div style="flex:1;">
-                                <p class="quantity">{{item.quantity}}</p>
+                                <p class="quantity cart-item-text">{{item.quantity}}</p>
                                 <div class="quantity">
                                     <img src="{% static 'images/arrow-up.png' %}"  class="chg-quantity update-cart" data-product={{item.product.id}} data-action="add">
                                     <img src="{% static 'images/arrow-down.png' %}"  class="chg-quantity update-cart" data-product={{item.product.id}} data-action="remove">
                                 </div>
                             </div>
                             <div style="flex:1;">
-                                <p>£ {{ item.get_total }}</p>
+                                <p class="cart-item-text">£ {{ item.get_total | floatformat:2 }}</p>
+                            </div>
+                            <div class="update-cart chg-quantity"
+                                data-product={{item.product.id}} 
+                                data-action="delete" 
+                                style="flex:1;"
+                            >
+                                <span  class="delete-item"> X </span>                                
                             </div>
                         </div>
                     {% endfor %}
-                </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-    {% endblock content %}
+{% endblock content %}
+
+<!-- <div style="flex:1;"><p class="cart-item-text">{{item.product.price|floatformat:2}}</p></div> -->
 

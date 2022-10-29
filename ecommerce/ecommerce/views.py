@@ -16,15 +16,30 @@ def index(request):
         cartItems = data['cartItems']
         context = {'cartItems':cartItems }
     else:
-       
         context = {}
         
     return render(request, 'index.html', context)
 
 
 def benefits(request):
-    return render(request, 'benefits.html')
+    if cartData:
+        data = cartData(request)
+        cartItems = data['cartItems']
+        context = {'cartItems':cartItems }
+    else:
+        context = {}
 
+    return render(request, 'benefits.html' , context)
+
+def delivery(request):
+    if cartData:
+        data = cartData(request)
+        cartItems = data['cartItems']
+        context = {'cartItems':cartItems }
+    else:
+        context = {}
+
+    return render(request, 'delivery.html' ,  context )
 
 def contactsView(request):
     if request.method == 'GET':

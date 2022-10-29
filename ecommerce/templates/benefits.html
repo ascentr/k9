@@ -1,15 +1,63 @@
-{% extends 'base.html' %}
-{% load static %}
-
+{% extends 'base.html' %} {% load static %} 
 
 {% block content %}
-
-<div class="container-fluid page-wrapper">
-    <div class="container page-wrapper-inner"> 
-        <div class="row">
-            <h1>Benefits of Raw Feeding</h1>
+<section id="benefits">
+  <div class="thick-hr"></div>
+  <div class="container-fluid">
+    <div class="container page-wrapper-inner">
+      <div class="row">
+        <div
+          class="col-lg-3 offset-1"
+          style="width: 40%; text-align: center; padding: 20px 0px"
+        >
+          <img src="{% static 'images/dog1.jpg' %}" height="400px" />
         </div>
-    </div>    
-</div>
+
+        <div class="col-lg-5">
+          <div class="" style="display: inline-flex">
+            <img
+              src="{% static 'images/icon-dog.png' %}"
+              height="30px"
+              style="align-self: center"
+            />
+            <h2 style="margin: 15px 5px">Why go Raw</h2>
+          </div>
+
+          <p class="text-general" style="padding-left: 35px">
+            Dogs are carnivors, that would eat raw food in their natural
+            habitat. Their bodies are designed to eat raw foods and not consume
+            processed grain based product with addatives. Normal commercial dog
+            food consists of 50% processed ingredients.<br /><br />
+            <strong
+              >We Select high quality raw feed for dogs sourced from leading
+              brands priortising the canine health and happiness.
+            </strong>
+          </p>
+
+          <div class="" style="display: inline-flex">
+            <img
+              src="{% static 'images/icon-dog.png' %}"
+              height="30px"
+              style="align-self: center"
+            />
+            <h2 style="margin: 15px 5px">Benefits of Raw Feeding</h2>
+          </div>
+
+          <ul>
+            <li class="benefits-list-item">Strengthened immune system.</li>
+            <li class="benefits-list-item">
+              Improved skin and softer, shinier coat.
+            </li>
+            <li class="benefits-list-item">Superior dental health.</li>
+            <li class="benefits-list-item">Superior joint and bone health.</li>
+            <li class="benefits-list-item">Reduced stool volume and odour.</li>
+            <li class="benefits-list-item">Enhanced reproductive health.</li>
+            <li class="benefits-list-item">Reduced Body Odour.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock content %}

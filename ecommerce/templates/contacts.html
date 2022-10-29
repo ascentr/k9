@@ -1,83 +1,87 @@
-{% extends 'base.html' %}
-{% load bootstrap4 %}
-{% load static %}
-
-
+{% extends 'base.html' %} {% load bootstrap4 %} {% load static %} 
 {% block content %}
+<div class="thick-hr"></div>
+<div class="container-fluid">
+  <div class="container page-wrapper-inner">
+    <div class="row">
+      <div class="col-lg-2" style="padding: 10px"></div>
 
-<!-- <div class="container" style="background-color: white; top:20px; position:relative;">  -->
-<div class="container-fluid page-wrapper">
-    <div class="container page-wrapper-inner"> 
-        <div class="row">
-            <div class="col-lg-6" style="padding:10px;">
-                <div class="box-element" id="form-wrapper">
+      <div class="col-lg-8" style="padding: 10px">
+        <div class="box-element" id="form-wrapper">
+          <h3>Contact Us</h3>
+          <p class="text-general">
+            Please feel free tocontact us via phone or email, or you can simply
+            use the form below to get in touch.
+            <br /><br />
 
-                    <div ><h3>Contact Us</h3>
-                        Please feel free tocontact us via phone or email, or you can simply use the form below to get in touch. <br/>
-                            <a href="tel:0123456789"> 
-                                <span class="icon-cont"><i class="bi bi-telephone-fill"></i></span> 
-                                <span> 01132 3456789</span>
-                            </a>
-                            &nbsp; &nbsp; &nbsp;
-                            <a href="mailto:info@homedesignupholstery.co.uk" target="_blank">
-                                <span class="icon-cont"><i class="bi bi-envelope"></i></span>
-                                <span>email@oursite.com</span>
-                            </a>
-                        </p>
-                        <form method="post">
-                            {% csrf_token %}
-                            {% bootstrap_form form %}<br/>
-                          <input type="submit" class='btn btn-primary' value="Submit">
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-lg-6" style="padding:10px;">
-                <div class="box-element" id="form-wrapper">
-                    <h3>Yorkshire K9 Fertility Clinic</h3> 585 Stanningley Rd<br/>Bramley<br/>Leeds<br/>LS13 4EL
-                </div>
-                <div class="box-element" id="form-wrapper">
-                    <h3>Heckmondwike Raw and More</h3> 585 Some Rd<br/>Heckmondwike<br/>West Yorkshire<br/>LS17 4EL
-                </div>
-
-            </div>
+            <a href="tel:0123456789">
+              <span class="icon-cont"
+                ><i class="bi bi-telephone-fill"></i
+              ></span>
+              <span> 01132 3456789</span>
+            </a>
+            &nbsp; &nbsp; &nbsp;
+            <a href="mailto:info@yorkshirek9raw.co.uk" target="_blank">
+              <span class="icon-cont"><i class="bi bi-envelope"></i></span>
+              <span>email@oursite.com</span>
+            </a>
+          </p>
+          <form method="post">
+            {% csrf_token %} {% bootstrap_form form %}<br />
+            <input type="submit" class="btn btn-primary" value="Submit" />
+          </form>
         </div>
-    </div>
-      
-    <!-- <div class="row justify-content-center" >
-      <div class="col-lg-6 pad-20" style="background-color:white; margin-top:20px;">
-
-    
-            <div class="row justify-content-center t20">
-                <h3>Contact Us</h3>
-            </div>
-
-
-          <div class="row col justify-content-center">
-            <div class="col">LEFT COLUMN</div>
-            <div class="col">RIGHT COLUMN</div>
-          </div>
-    
-          <div class="t20">
-            <form method="post">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-              <input type="submit" class='btn btn-primary' value="Submit">
-            </form>
-          </div>
-    
-
       </div>
-    </div> -->
+    </div>
+
+    <div class="row" style="padding: 30px 10px 5px 10px">
+      <div class="col-lg-2" "></div>
+    <div class="col">
+      <h3>Our Stores</h3>
+      <p class="text-general">
+        At Present we operate two stores in West Yorkshire area covering Leeds
+        and Parts of Wakefield <br />
+        and Bradford. <br />
+        Please check
+        <a href="{% url 'delivery' %}#delivery">delivery details </a>
+        for more information, or feel free to get in touch.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6" style="padding: 10px; border-right: 2px solid salmon">
+      <div class="box-element" id="form-wrapper">
+        <h5>Yorkshire K9 Fertility Clinic</h5>
+        585 Stanningley Rd<br />Bramley<br />Leeds LS13 4EL
+      </div>
+      <div style="margin-top: 10px">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2356.0104336785107!2d-1.6472560839578414!3d53.80709804779963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48795f7403533bad%3A0x7f111a441e4ba1b3!2sYorkshire%20K9%20Fertility%20Clinic!5e0!3m2!1sen!2suk!4v1666318382024!5m2!1sen!2suk"
+          width="100%"
+          height="500"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+    <div class="col-lg-6" style="padding: 10px">
+      <div class="box-element">
+        <h5>Heckmondwike Raw and More</h5>
+        4 Church Street<br />Heckmondwike<br />WF15 0LF
+      </div>
+      <div style="margin-top: 10px">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2361.7305738101563!2d-1.6752339839606372!3d53.705246555468186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487bdfb1066cfa13%3A0xad6830f9f14728a6!2sHeckmondwike%20raw%20%26%20more!5e0!3m2!1sen!2suk!4v1666318717816!5m2!1sen!2suk"
+          width="100%"
+          height="500"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </div>
 </div>
-
-
-
-
-
-  
-
-
 
 {% endblock content %}

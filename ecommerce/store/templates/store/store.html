@@ -1,31 +1,56 @@
 {% extends 'base.html' %}
 {% load static %}
-
-
-
+{% load mathfilters %}
 
 {% block content %}
 <!-- content found from https://www.albionmeatproducts.co.uk/raw-dog-food/-->
-<div class="container-fluid page-wrapper">
+<div class="thick-hr"> </div>
+<div class="container-fluid">
     <div class="container page-wrapper-inner" style="padding:10px 0px;">
         <div class="row product-row">
             {% for product in products %}
-            <div class="col-lg-4 product-info">
-                <img src="{{ product.image.url }}" class="img-product" >
-                <div class="box-element-product product" >
-                    <h6><Strong>{{ product.name }}</Strong></h6>
-                    <hr>
-                    <button class="btn btn-outline-secondary add-btn update-cart"
-                            data-product={{product.id}} 
-                            data-action="add">
-                            Add to Cart 
-                        <span style="padding: 3px;">
-                            <strong>£ {{ product.price|floatformat:2 }}</strong>
-                        </span>
-                    </button>
-                </div>
-            </div>
+                <div class="col-lg-4 product-info">
+                    <div class="box-element-product" >
+                        <div style="min-height:250px;">
+                            <img src="{{ product.image.url }}" class="img-product" >
+                            <h6>
+                               {{ product.name }}  
+                            </h6>
 
+                        </div>
+                        <div class="" style="display: flex-box; flex-direction:column; justify-content:space-between;">
+                            <button class="btn btn-outline-secondary add-btn update-cart"
+                                style="margin:5px 0;" 
+                                data-product={{product.id}} 
+                                data-action="add">
+                                <Strong>£{{ product.price|floatformat:2 }} </Strong> &nbsp; &nbsp;  &nbsp; Add to Cart                      
+                            </button>
+                            <button class="btn btn-outline-secondary add-btn multi-to-cart"
+                                style="margin:5px 0;" 
+                                data-product={{product.id}} 
+                                data-quantity={{product.multibuy_quantity}}
+                                data-price={{product.multibuy_price}}
+                                data-action="add">
+                                <span style="padding: 3px; font-size:large;">
+                                    BUY {{ product.multibuy_quantity }} for £
+                                    {{ product.multibuy_quantity|mul:product.multibuy_price}}
+                                </span>
+                            </button>
+                            <button
+                                style="margin:5px 0;" 
+                                class="btn btn-outline-secondary add-btn multi-to-cart"
+                                data-product={{product.id}} 
+                                data-quantity={{product.multibuy_quantity2}}
+                                data-price={{product.multibuy_price2}}
+                                data-action="add">
+                                <span style="padding: 3px; font-size:large;">
+                                    BUY {{ product.multibuy_quantity2}} for £
+                                    {{ product.multibuy_quantity2|mul:product.multibuy_price2}}
+                                </span>
+                            </button>
+                        </div>    
+                    </div>
+                </div>
             {% endfor %}
         </div>
     </div>

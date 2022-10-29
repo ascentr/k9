@@ -4,28 +4,58 @@ for (i = 0; i < updateBtns.length; i++) {
     updateBtns[i].addEventListener('click', function () {
         var productId = this.dataset.product
         var action = this.dataset.action
-        console.log('productId:', productId, 'action:', action)
-
+        var isMulti = false
         if (user == 'AnonymousUser') {
-            addCookieItem(productId, action)
+            addCookieItem(productId, action, isMulti)
         } else {
-            updateUserOrder(productId, action)
+            updateUserOrder(productId, action, isMulti)
         }
-
     })
 }
 
 
-function addCookieItem(productId, action){
-    console.log('AnonymousUser', 'productId:', productId, 'action:', action)
 
-    if (action =='add'){
-        if (cart[productId]==undefined){
-            cart[productId]={'quantity':1}
-        }else{
-            console.log('adding to quantity')
-            cart[productId]['quantity'] += 1
-        }        
+var multibuyBtns = document.getElementsByClassName('multi-to-cart')
+
+for (i = 0 ; i< multibuyBtns.length; i++ ) {
+    multibuyBtns[i].addEventListener('click', function() {
+        var productId = this.dataset.product
+        var action = this.dataset.action
+        var price = this.dataset.price
+        var quantity = this.dataset.quantity
+        var isMulti = true
+        if (user == 'AnonymousUser') {
+            addCookieItem(productId, action, price, quantity, isMulti)
+        }
+        else {
+            updateUserOrder2(productId, action, price, quantity, isMulti) 
+        }
+    })
+
+}
+
+
+function addCookieItem(productId, action, price, quantity , isMulti){
+
+    if (action == 'delete') {
+        cart[productId] = {'quantity':0 }
+        delete cart[productId]
+    }
+
+    if (action == 'add'){
+        if (isMulti) {
+            if (cart[productId]==undefined){
+                cart[productId]={'quantity':parseInt(quantity)}
+            } else {
+                cart[productId]['quantity'] = parseInt(cart[productId]['quantity']) + parseInt(quantity) 
+            }
+        } else {
+            if (cart[productId]==undefined){
+                cart[productId]={'quantity':1}
+            } else {
+                cart[productId]['quantity'] += 1
+            }
+        }
     }
 
     if (action=='remove'){
@@ -36,12 +66,12 @@ function addCookieItem(productId, action){
         }
     }
 
-    console.log('cart:', cart)
     document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    console.log('my cart ==>', cart)
     location.reload()
 }
 
-function updateUserOrder(productId, action){
+function updateUserOrder(productId, action, isMulti){
     console.log(user ,' is logged in ','productId:', productId, 'action:', action)
 
     var url = '/store/update_item/'
@@ -52,7 +82,34 @@ function updateUserOrder(productId, action){
             'X-CSRFToken':csrftoken,
 
         } ,
-        body:JSON.stringify({'productId':productId, 'action':action})
+        body:JSON.stringify({'isMulti':isMulti, 'productId':productId, 'action':action})
+        
+    })
+    .then((response) =>{
+        return response.json()
+    })
+    .then((data) =>{
+        console.log('data: ', data)
+        location.reload()
+    })
+}
+
+function updateUserOrder2(productId, action, price, quantity , isMulti ){
+    var url = '/store/update_item/'
+    fetch( url, {
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json' ,
+            'X-CSRFToken':csrftoken,
+
+        } ,
+        body:JSON.stringify({
+            'isMulti':isMulti,
+            'productId':productId, 
+            'action':action , 
+            'price':price, 
+            'quantity':quantity
+        })
         
     })
     .then((response) =>{

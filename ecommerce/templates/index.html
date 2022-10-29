@@ -1,83 +1,183 @@
-{% extends 'base.html' %}
-{% load static %}
-
-
+{% extends 'base.html' %} {% load static %} 
 {% block content %}
-<div class="container-fluid">
+<section>
+  <div class="thick-hr"></div>
+  <div class="container-fluid">
     <div class="container">
-        <div class="container home1"> 
-            <div class="header3">Yorkshire</div>
-            <div class="header2">K9 RAW</div>
-            <div class="header3">to your door</div>
-        </div>
-        <div>
-            <img src="{% static 'images/dogs.png' %}" class="img-main">
-        </div>
+      <div>
+        <img
+          src="{% static 'images/test/home-pic4.png' %}"
+          class="img-main"
+          ali
+        />
+      </div>
 
-        <div class="home header4"">   <p>Quality Raw Dog Food delivered to your door </p> </div>
-        <div class="home">
-            <button class="btn btn-lg call-to-act">  
-                Shop Now
-            </button>
-            <button class="btn btn-lg btn-outline-success call-to-act2"> 
-                See Deals
-            </button>
-        </div>
+      <div class="home header4">
+        <p style="color: #f35d45">
+          Quality Raw Dog Food delivered to your door
+        </p>
+      </div>
+      <div class="home">
+        <a href="{% url 'store' %}">
+          <button class="btn btn-success btn-lg call-to-act">Shop Now</button>
+        </a>
+        <a href="{% url 'deals' %}">
+          <button class="btn btn-outline-success btn-lg call-to-act">
+            See Deals
+          </button>
+        </a>
+      </div>
     </div>
-</div>
-    <div class="container-fluid" 
-            style="background-color:rgb(255, 255, 255) ; 
-                left:0; right: 0; margin-top: 2em; 
-                height: 100%; min-height: 600px; top:0">
-        <div class="container" style="text-align: center;">
-            <div class="row"> <h2 style="margin:20px  0;">Featured Products</h2></div>
-            <div class="row wrapper-featured">
-                <div class="col-md-3 featured">
-                    <div>
-                        <img src="{% static 'images/brand-totally.png' %}" width="100px" style="float:left">
-                        <img src="{% static 'images/specialoffer.png' %}"  width="150px"  style="float:right">
-                    </div>
-                    <div>
-                        <h5>Any box of Totaly Natural 8 x 1kg bags</h5>
-                        <h4> only £27</h4>
-                    </div>
-                    <button class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-                </div>
-                <div class="col-md-3 featured">
-                    <div>
-                        <img src="{% static 'images/brand-finerbynature.png' %}" width="100px" style="float:left">
-                        <img src="{% static 'images/specialoffer.png' %}"  width="150px"  style="float:right">
-                    </div>
-                    <div>
-                        <h5>Any 14 1kg bags of Finer by nature</h5>
-                        <h4> only £47</h4>
-                    </div>
-                    <button class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-                </div>
-                <div class="col-md-3 featured">
-                    <div>
-                        <img src="{% static 'images/brand-durhams.png' %}" width="100px" style="float:left">
-                        <img src="{% static 'images/specialoffer.png' %}"  width="150px"  style="float:right">
-                    </div>
-                    <div>
-                        <h5> Any 14 block Box of Durham</h5>
-                        <h4> only £19 </h4><br/>
-                    </div>
-                    <button class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
-                </div>
-            </div>
+  </div>
+</section>
+
+<section>
+  <div class="container-fluid wrapper-featured-outer">
+    <div class="container" style="text-align: center">
+      <div class="row"><h2 style="margin: 20px 0">Featured Products</h2></div>
+      <div class="row wrapper-featured">
+        <div class="col-md-3 featured">
+          <div>
+            <img
+              src="{% static 'images/brand-totally.png' %}"
+              width="90px"
+              style="float: left"
+            />
+            <img
+              src="{% static 'images/specialoffer.png' %}"
+              width="150px"
+              style="float: right"
+            />
+          </div>
+          <div>
+            <h5>Any box of Totaly Natural 8 x 1kg bags</h5>
+            <h4>only £27</h4>
+          </div>
+          <button class="btn btn-outline-secondary add-btn update-cart">
+            Add to Cart
+          </button>
+        </div>
+        <div class="col-md-3 featured">
+          <div>
+            <img
+              src="{% static 'images/brand-finerbynature.png' %}"
+              width="100px"
+              style="float: left"
+            />
+            <img
+              src="{% static 'images/specialoffer.png' %}"
+              width="150px"
+              style="float: right"
+            />
+          </div>
+          <div>
+            <h5>Any 14 1kg bags of Finer by nature</h5>
+            <h4>only £47</h4>
+          </div>
+          <button class="btn btn-outline-secondary add-btn update-cart">
+            Add to Cart
+          </button>
+        </div>
+        <div class="col-md-3 featured">
+          <div>
+            <img
+              src="{% static 'images/brand-durhams.png' %}"
+              width="100px"
+              style="float: left"
+            />
+            <img
+              src="{% static 'images/specialoffer.png' %}"
+              width="150px"
+              style="float: right"
+            />
+          </div>
+          <div>
+            <h5>Any 14 block Box of Durham</h5>
+            <h4>only £19</h4>
+            <br />
+          </div>
+          <button
+            class="btn btn-outline-secondary add-btn update-cart"
+            style="margin-bottom: 5px"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="brands">
+      <img src="{% static 'images/brand-albion.png' %}" class="thumb-brand" />
+      <img src="{% static 'images/brand-durhams.png' %}" class="thumb-brand" />
+      <img
+        src="{% static 'images/brand-finerbynature.png' %}"
+        class="thumb-brand"
+      />
+      <img src="{% static 'images/brand-totally.png' %}" class="thumb-brand" />
+      <img
+        src="{% static 'images/brand-breederschoice-1.png' %}"
+        class="thumb-brand"
+        height="46px"
+      />
+    </div>
+  </div>
+</section>
+<div class="thick-hr"></div>
+<section id="benefits">
+  <div class="container-fluid wrapper-featured-outer">
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-lg-3 offset-1"
+          style="width: 40%; text-align: center; padding: 20px 0px"
+        >
+          <img src="{% static 'images/dog1.jpg' %}" height="400px" />
         </div>
 
-        <div class="brands">
-            <img src="{% static 'images/brand-albion.png' %}" class="thumb-brand" />
-            <img src="{% static 'images/brand-durhams.png' %}" class="thumb-brand" />
-            <img src="{% static 'images/brand-finerbynature.png' %}" class="thumb-brand" />
-            <img src="{% static 'images/brand-totally.png' %}" class="thumb-brand" />
-            <img src="{% static 'images/brand-breederschoice.png' %}" class="thumb-brand" />
+        <div class="col-lg-5">
+          <div class="" style="display: inline-flex">
+            <img
+              src="{% static 'images/icon-dog.png' %}"
+              height="30px"
+              style="align-self: center"
+            />
+            <h2 style="margin: 15px 5px">Why go Raw</h2>
+          </div>
+
+          <p style="font-size: 1.3rem; padding-left: 35px">
+            Dogs are carnivors, that would eat raw food in their natural
+            habitat. Their bodies are designed to eat raw foods and not consume
+            processed grain based product with addatives. Normal commercial dog
+            food consists of 50% processed ingredients.<br /><br />
+            <strong
+              >We Select high quality raw feed for dogs sourced from leading
+              brands priortising the canine health and happiness.
+            </strong>
+          </p>
+
+          <div class="" style="display: inline-flex">
+            <img
+              src="{% static 'images/icon-dog.png' %}"
+              height="30px"
+              style="align-self: center"
+            />
+            <h2 style="margin: 15px 5px">Benefits of Raw Feeding</h2>
+          </div>
+
+          <ul style="font-size: 1.3rem">
+            <li class="benefits-list-item">Strengthened immune system.</li>
+            <li class="benefits-list-item">
+              Improved skin and softer, shinier coat.
+            </li>
+            <li class="benefits-list-item">Superior dental health.</li>
+            <li class="benefits-list-item">Superior joint and bone health.</li>
+            <li class="benefits-list-item">Reduced stool volume and odour.</li>
+            <li class="benefits-list-item">Enhanced reproductive health.</li>
+            <li class="benefits-list-item">Reduced Body Odour.</li>
+          </ul>
         </div>
-
-    </div> 
-
-
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock content %}

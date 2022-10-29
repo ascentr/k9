@@ -3,6 +3,7 @@
 # from itertools import product
 # from pyexpat import model
 # from statistics import mode
+from email.policy import default
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
@@ -15,10 +16,12 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-
 class Brand(models.Model):
     brand = models.CharField(max_length=200, blank=True)
-    
+
+    def __str__(self):
+        return self.brand
+
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
@@ -29,10 +32,14 @@ class Product(models.Model):
     discription = models.TextField(default='')
     image = models.ImageField(null=True, blank=True)
 
-    # multibuy = models.BooleanField(default=True)
-    # multibuy_name = models.CharField(max_length=200,  default='')
-    # multibuy_quantity = models.PositiveIntegerField(default=8, blank=True, null=True)
-    # multibuy_price = models.DecimalField(max_digits=8, decimal_places=2, blank=True, null=True)
+    multibuy = models.BooleanField(default=True)
+    multibuy_name = models.CharField(max_length=200,  default='')
+    multibuy_quantity = models.PositiveIntegerField(default=10, blank=True, null=True)
+    multibuy_price = models.DecimalField(max_digits=8, decimal_places=3, blank=True, null=True, default=1.5)
+
+    multibuy_name2 = models.CharField(max_length=200,  default='')
+    multibuy_quantity2 = models.PositiveIntegerField(default=20, blank=True, null=True)
+    multibuy_price2 = models.DecimalField(max_digits=8, decimal_places=3, blank=True, null=True, default=1.425)
 
     def __str__(self):
         return self.name
@@ -44,13 +51,6 @@ class Product(models.Model):
         except:
             url = ''
         return url
-
-# class Multibuy(models.Model):
-#     name = models.CharField(max_length=200, default='Multibuy')
-#     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, related_name="multibuy_brand", blank=True, default=1)
-#     product = models.ForeignKey(Product,  on_delete=models.SET_NULL, null=True)
-#     max_items = models.IntegerField(default=8, null=True, blank=True)
-#     price = models.DecimalField(max_digits=8, decimal_places=2)
 
 
 class Bundle(models.Model):
@@ -74,12 +74,8 @@ class Order(models.Model):
     def shipping(self):
         shipping = True
         orderitems = self.orderitem_set.all()
-
-        # for i in orderitems:
-        #     if i.product.digital == False:
-        #         shipping = True                
+                     
         return shipping
-
 
     @property
     def get_cart_total(self):
@@ -93,7 +89,6 @@ class Order(models.Model):
         total = sum([item.quantity for item in orderitems])
         return total
 
-
 class OrderItem(models.Model):
     product = models.ForeignKey(Product,  on_delete=models.SET_NULL, null=True)
     order =   models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
@@ -102,7 +97,13 @@ class OrderItem(models.Model):
 
     @property
     def get_total(self):
-        total = self.product.price * self.quantity
+        if self.quantity >= 20:
+            total = self.product.multibuy_price2 * self.quantity
+
+        elif  self.quantity >=10:
+            total = self.product.multibuy_price * self.quantity
+        else:
+            total = self.product.price * self.quantity
         return total
 
 class ShippingAddress(models.Model):
@@ -115,18 +116,5 @@ class ShippingAddress(models.Model):
 	date_added = models.DateTimeField(auto_now_add=True)
 
 
-'''
 
-class ShippingAddress(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-    address = models.CharField(max_length=200, null=False)
-    city = models.CharField(max_length=200, null=False)
-    county = models.CharField(max_length=200, null=False) 
-    postcode = models.CharField(max_length=200, null=False)
-    date_added = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.address
-'''
 

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container-fluid page-wrapper">
+    <div class="container page-wrapper-inner"> 
+        <section id="delivery">
+            <div class="row" style="padding: 0px 50px;">
+                <div class="" style="display: inline-flex">
+                    <img
+                        src="{% static 'images/icon-van.png' %}"
+                        height="30px"
+                        style="align-self: center"
+                    />
+                    <h2 style="margin: 15px 5px">Delivery Information</h2>
+                </div>
+                    <p class="text-general-delivery">
+                        We offer free delivery on orders over £30 and there is a £2 charge to deliver orders below £30. 
+                        Any orders placed before Sunday will be delivered by the following Wednesday in some rare cases 
+                        the delivery might be on a Saturday this is to make sure that we can source the products 
+                        that you've ordered to meet your very specific needs. </p>
+                    <p class="text-general-delivery">
+                        Generally speaking we will deliver 
+                        within the 20 mile radius from any of our stores please have a look at the map 
+                        to see if you fall within the catchment area alternatively you can always give us a 
+                        call and see if we can deliver it to you 
+                    </p>
+            </div>
+ 
+        </section>
+
+
+        <section>
+            <div class="row" style="padding: 0px 50px;">
+                <div class="" style="display: inline-flex">
+                    <img
+                        src="{% static 'images/icon-marker.png' %}"
+                        height="30px"
+                        style="align-self: center"
+                    />
+                    <h2 style="margin: 15px 5px">Areas We Cover</h2>
+                </div>
+                <p class="text-general-delivery">
+                    At present we offer free delivery services in and around our two stores.  Generally the delivery area 
+                    streches out approximatley 20 miles from each location.                      
+                </p>
+            </div>
+            <div class="row container" 
+                style="margin: 20px 0px;">
+                <div class="col-lg-5" >
+                    <div class="box-element">
+                        <h5>Yorkshire K9 Fertility Clinic</h5>
+                        585 Stanningley Rd<br />Bramley<br />Leeds LS13 4EL
+                      </div>                    
+                </div>
+                <div class="col-lg-6 box-element">
+                    <img src="{% static 'images/map-del-leeds.png' %}"  />
+                </div>
+            </div>
+
+            <div class="thick-hr"></div>
+            <div class="row container" style="text-align: center; margin: 20px 0px;">
+                <div class="col-lg-5" ">
+                    <div class="box-element">
+                        <h5>Heckmondwike Raw and More</h5>
+                        4 Church Street<br />Heckmondwike<br />WF15 0LF
+                      </div>                    
+                </div>
+                <div class="col-lg-6 box-element">
+                    <img src="{% static 'images/map-del-wf.png' %}"  />
+                </div>
+            </div>
+
+
+
+        </section>        
+    </div>    
+</div>
+
+{% endblock content %}

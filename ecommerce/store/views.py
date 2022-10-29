@@ -1,3 +1,4 @@
+from itertools import product
 from django.shortcuts import render
 from django.http import JsonResponse
 import json
@@ -5,17 +6,28 @@ import datetime
 from .models import *
 from .utils import cookieCart, cartData, guestOrder
 
-# Create your views here.
+
 def store(request):
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
 
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('brand')
 
-    context = {'products': products , 'cartItems':cartItems }
+
+    context = {'products': products , 'cartItems':cartItems  }
     return render(request, 'store/store.html', context)
+
+def deals(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
+    context = {'cartItems':cartItems  }
+    return render(request, 'store/deals.html', context)
+
 
 def cart(request):
     data = cartData(request)
@@ -39,11 +51,18 @@ def checkout(request):
 
 def updateItem(request):
     data = json.loads(request.body)
+    isMulti =  data['isMulti']
     productId = data['productId']
     action = data['action']
-    print('Action:', action)
-    print('Product:', productId)
-    
+
+    print('action :>>',  action)
+    if isMulti:
+
+        print('Logged in User update item view is Multi >>>', isMulti)
+        price = data['price']
+        quantity = data['quantity']
+        print('myquantity in views:  >>', quantity , 'price : £', price , action)
+
 
     customer = request.user.customer
     product = Product.objects.get(id=productId)
@@ -51,14 +70,23 @@ def updateItem(request):
     
     orderItem,created = OrderItem.objects.get_or_create(order=order, product=product)
 
+    if action == 'delete':
+        orderItem.quantity = 0
+
     if action =='add':
-        orderItem.quantity = (orderItem.quantity + 1 )
+        if isMulti:
+            print("actual price", price)
+            orderItem.product.price = price
+            orderItem.quantity = int(quantity) + int(orderItem.quantity)
+        else:
+            orderItem.quantity = (orderItem.quantity + 1 )
+
     elif action == 'remove':
         orderItem.quantity = (orderItem.quantity -1 )
 
     orderItem.save()
 
-    if orderItem.quantity  <= 0:
+    if int(orderItem.quantity)  <= 0:
         orderItem.delete()
     
     return JsonResponse('Item was added--I reside in view', safe=False)

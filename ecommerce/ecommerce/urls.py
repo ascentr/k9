@@ -8,10 +8,11 @@ from . import views
 urlpatterns = [
     path('', views.index, name="index"),
     path('benefits/', views.benefits, name="benefits"),
+    path('delivery/', views.delivery, name="delivery"),
     path('contacts/', views.contactsView, name='contacts'),
     path('success/', views.successView, name="success"),
     path('store/', include('store.urls')),
-    path('admin/', admin.site.urls),
+    path('a/dogcontrol/', admin.site.urls),
     path('accounts/', include("accounts.urls", namespace="accounts")),
     path('accounts/', include("django.contrib.auth.urls")),
 
